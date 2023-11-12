@@ -21,6 +21,8 @@ axios.interceptors.request.use(async function (config) {
     )) {
         await axios.get('/sanctum/csrf-cookie')
         axios.defaults.headers.common['X-CSRF-TOKEN'] = Cookies.get('XSRF-TOKEN')
+
+        console.log(Cookies.get('XSRF-TOKEN'))
     }
 
     if (config.progress) {
