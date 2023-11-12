@@ -26,6 +26,7 @@ axios.interceptors.request.use(async function (config) {
         NProgress.start();
     }
 
+    console.log(config)
     return config;
 }, function (error) {
     // Do something with request error
