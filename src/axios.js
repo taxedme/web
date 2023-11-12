@@ -9,8 +9,6 @@ axios.defaults.headers.common['Accept'] = 'application/json';
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
-axios.defaults.headers.common['X-CSRF-TOKEN'] = Cookies.get('XSRF-TOKEN')
-
 
 
 
@@ -22,14 +20,7 @@ axios.interceptors.request.use(async function (config) {
         config.method == 'delete'
     )) {
         await axios.get('/sanctum/csrf-cookie')
-
-        axios.defaults.headers.common['X-CSRF-TOKEN'] = Cookies.get('XSRF-TOKEN')
-
-        // console.log(Cookies.get('XSRF-TOKEN'))
     }
-
-
-    axios.defaults.headers.common['X-CSRF-TOKEN'] = Cookies.get('XSRF-TOKEN')
 
     if (config.progress) {
         NProgress.start();
