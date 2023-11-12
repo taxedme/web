@@ -1,0 +1,26 @@
+
+
+name: Deployment Workflow
+on:
+  push:
+    branches: [ dev ]
+
+jobs:
+  job_one:
+    name: Deploy
+    runs-on:  ubuntu-latest
+    steps:
+    - name: Deploying taxedme over ssh client
+      uses: appleboy/ssh-action@master
+      with:
+        host: 62.72.8.153
+        username: root
+        key: ${{ secrets.RSA_SECRET }}
+        port: 22
+        script: |
+          cd /home/taxedme-dev/web
+          git add . && git commit -m 'update server'
+          git pull origin dev --no-edit --force --allow-unrelated-histories
+          npm install
+          npm run build
+          rsync -av --progress ./dist/ /home/taxedme-dev/htdocs/dev.taxedme.com
