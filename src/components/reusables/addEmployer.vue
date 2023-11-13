@@ -37,7 +37,7 @@
                                 salary
                             </div>
                             <div class="relative h-full w-full">
-                                <input type="number" v-model="form.salary"
+                                <input type="text" v-model="form.salary"
                                     class=" w-full focus-visible:outline-0 border border-gray-300 rounded-md p-2">
                             </div>
                         </div>
