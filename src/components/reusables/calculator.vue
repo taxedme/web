@@ -84,7 +84,7 @@
                                 </div>
                             </td>
                             <td class="">
-                                {{ v.salary.toLocaleString('en-US') }}
+                                {{ v.salary }}
                             </td>
                             <td class="">
                                 {{ v.months }}
