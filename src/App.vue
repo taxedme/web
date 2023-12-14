@@ -1,10 +1,10 @@
 <template>
-  <div v-if="appRef.route == 'app' && appRef.preload.isLoaded" class=" flex ">
+  <div v-if="appRef.route == 'app' && appRef.preload.isLoaded" class=" flex lg:flex-row flex-col ">
     <!-- <div
       class="sidebar bg-blue-800 text-blue-100 w-64 space-y-6 py-7 px-2 fixed inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition duration-200 ease-in-out">
     </div> -->
     <sidebar ></sidebar>
-    <div class="flex-1 p-10   h-screen o flex flex-col overflow-y-auto">
+    <div class="flex-1 p-7 h-screen o flex flex-col overflow-y-auto">
       <Header></Header>
       <router-view></router-view>
     </div>

@@ -5,9 +5,9 @@
     </div>
 
     <div v-if="open" class="bg-[#0000007c] fixed top-0 w-full h-full right-0 z-[100] grid place-content-center">
-        <div class=" border border-gray-200 right-0 bottom-0 h-fit bg-white py-4 px-8 rounded-md w-[40em]">
+        <div class=" border border-gray-200 right-0 bottom-0 h-fit bg-white py-[30px] px-[30px] rounded-md w-[40em]">
             <div class="flex justify-between pb-6">
-                <div class=" text-xl font-semibold leading-[25px] ">
+                <div class=" text-xl font-semibold leading-[25px] text-[#273469]">
                     Add Organization
                 </div>
 
@@ -15,28 +15,28 @@
             </div>
             <form @submit.prevent="store()" class="flex flex-col gap-6 h-fit">
                 <div class="justify-start items-start gap-[5px] flex flex-col">
-                    <div class="text-sm font-semibold capitalize ">
-                        Organization name
+                    <div class="text-[18px] font-[500] capitalize text-[#30343F]">
+                        Company name
                     </div>
                     <div class="relative grid w-full h-full">
                         <input v-model="form.title"
-                            class="w-[75%] focus-visible:outline-0   border border-gray-300 rounded-md p-2">
+                            class="w-[75%] focus-visible:outline-0   border border-[#D3D0D0] rounded-md bg-[#FAFAFA] p-2">
                     </div>
                 </div>
 
                 <div class="justify-start items-start gap-[5px] flex flex-col">
-                    <div class="text-sm font-semibold capitalize ">
+                    <div class="text-[18px] font-[500] capitalize text-[#30343F]">
                         Description
                     </div>
                     <div class="relative grid w-full h-full">
-                        <textarea v-model="form.description"></textarea>
+                        <textarea class="  border border-[#D3D0D0] rounded-md bg-[#FAFAFA] p-2" v-model="form.description"></textarea>
                     </div>
                 </div>
 
                 <div class="w-full flex justify-end ">
                     <button
-                        class="text-sm capitalize cursor-pointer bg-[#302E81] w-fit h-fit p-2 rounded-md placeholder border border-gray-200 text-white">
-                        Add Organization
+                        class="text-[16px] capitalize cursor-pointer bg-[#302E81] w-fit h-fit py-[12px] px-[40px] rounded-md placeholder border border-gray-200 text-white">
+                        Add company
                     </button>
                 </div>
             </form>

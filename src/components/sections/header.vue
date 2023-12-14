@@ -1,8 +1,8 @@
 <template>
-    <div class="w-full flex flex-col gap-8 h-[10%]">
+    <div class="w-full flex flex-col gap-8 mb-[71px]">
         <div class="grid gap-4">
             <div class="w-full flex justify-between items-center">
-                <span>Taxes</span>
+                <span class="text-[24px] leading-6 font-[600]">Taxes</span>
                 <!-- <button
                     class="px-3.5 py-2 bg-indigo-900 rounded-[5px] justify-center items-center gap-2.5 inline-flex text-white">
                     Export table
@@ -10,7 +10,7 @@
             </div>
 
 
-            <nav class="flex " aria-label="Breadcrumb">
+            <!-- <nav class="flex " aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-3">
                     <li class="inline-flex items-center">
                         <a href="#" class="inline-flex items-center text-sm font-normal text-gray-700 hover:text-blue-600e">
@@ -31,7 +31,7 @@
                         </div>
                     </li>
                 </ol>
-            </nav>
+            </nav> -->
 
         </div>
     </div>

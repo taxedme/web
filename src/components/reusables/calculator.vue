@@ -27,10 +27,10 @@
 
 
 
-                <ExemptionsVue :settings="props.organization.settings"></ExemptionsVue>
+                <ExemptionsVue :settings="props.organization.settings" @calculate="calculate()"></ExemptionsVue>
                 <div class="bg-white w-fit h-fit p-2 rounded-md placeholder border border-gray-200">
                     <span>Total Tax:</span>
-                    <b>{{ totalTax.toLocaleString('en-US') }}</b>
+                    <b>{{ totalTax.toLocaleString("en-US") }}</b>
                 </div>
             </div>
         </div>
@@ -55,20 +55,21 @@
                             <th class=" p-3 ">
                                 Total pay
                             </th>
+
                             <th class=" p-3 ">
-                                Consolidated Relief Allowance
+                                Allowed Pension
+                            </th>
+                            <th class=" p-3 ">
+                                Total Reliefs
                             </th>
 
                             <th class=" p-3 ">
-                                Earned Income
+                                Taxable Income
                             </th>
                             <th class=" p-3 ">
                                 Tax Payable
                             </th>
-
                             <th class="px-3"></th>
-
-
                         </tr>
                     </thead>
 
@@ -93,14 +94,17 @@
                                 {{ v.total_pay.toLocaleString('en-US') }}
                             </td>
                             <td class="">
-                                {{ v.consolidated.toLocaleString('en-US') }}
+                                {{ v.allowed_pension.toLocaleString('en-US') }}
+                            </td>
+                            <td class="">
+                                {{ v.total_reliefs.toLocaleString('en-US') }}
                             </td>
 
                             <td class="">
-                                {{ v.earned_income.toLocaleString('en-US') }}
+                                {{ v.taxable_income.toLocaleString('en-US') }}
                             </td>
                             <td class="">
-                                {{ v.tax_payable.toLocaleString('en-US') }}
+                                {{ v.annual_tax_payable.toLocaleString('en-US') }}
                             </td>
                             <td class="px-3 select-none">
 
@@ -124,7 +128,8 @@
                         </tr>
                         <tr ref="adjustment" class="hidden border-b border-gray-300">
                             <td colspan="8" class="">
-                                <adjustments :adjust="data.adjust" :organization_id="props.organization.id"></adjustments>
+                                <adjustments :adjust="data.adjust" :organization_id="props.organization.id" >
+                                </adjustments>
                             </td>
                         </tr>
                     </tbody>
@@ -133,6 +138,7 @@
 
 
             <div class="flex justify-between">
+
 
 
                 <!-- <div @click="calculate()"
@@ -168,24 +174,24 @@ import adjustments from '@/components/reusables/adjustments.vue';
 import ExemptionsVue from '@/components/reusables/exemptions.vue';
 import AddEmployer from '@/components/reusables/addEmployer.vue';
 
+
+const sheets = ref([]);
+
+
 const props = defineProps({
     organization: Object
 })
 
 const totalTax = computed(() => {
-    if (Object.keys(sheets.value) < 1) {
-        return 0;
-    }
-
     let sum = 0;
-
-    sheets.value.forEach(v => {
-        sum += v.tax_payable
-    })
+    if (sheets.value.length != undefined && sheets.value.length > 0) {
+        sheets.value.forEach(v => {
+            sum += parseInt(v.annual_tax_payable)
+        })
+    }
     return sum;
 })
 
-const sheets = ref({});
 
 // Html's
 const tableBody = ref();
@@ -344,6 +350,7 @@ function toggle(e) {
 function setBody() {
     $(function () {
 
+        console.log(document.querySelector('.table-body'));
         const tBody = document.querySelector('.table-body').clientHeight
         $('.fixTableHead').css('height', (parseInt(tBody) - 30) + 'px')
     });
@@ -364,7 +371,7 @@ function excelExport() {
     //This loop will extract the label from 1st index of on array
     for (var index in arrData[0]) {
         //Now convert each value to string and comma-seprated
-        row += index + ',';
+        row += index.toUpperCase().replace("_", " ") + ',';
     }
 
     row = row.slice(0, -1);
@@ -423,9 +430,9 @@ function excelExport() {
     document.body.removeChild(link);
 }
 
+function calculate() {
 
-
-onMounted(() => {
+    console.log("Sdsd")
     // Calculate
     axios.post('api/tax/calculate', { organization_id: props.organization.id })
         .then((e) => {
@@ -434,7 +441,16 @@ onMounted(() => {
         .catch((e) => {
             console.log(e)
         })
+}
 
+
+
+onMounted(() => {
+
+    // Calculate Tax
+    calculate();
+
+    // Responsive table
     setBody();
 
     addEventListener('resize', () => {

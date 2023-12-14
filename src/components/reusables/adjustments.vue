@@ -50,90 +50,60 @@
             </div>
 
             <div class="grid pl-6 gap-4 pt-2 pb-8 h-fit ">
-                <label class="pb-2 text-start font-semibold text-lg"> Exemptions</label>
+                <label class="pb-2 text-start font-semibold text-lg">Exemptions</label>
                 <div class="w-full flex gap-8 ">
                     <div class="grid  h-fit">
-                        <div class="text-start">
+                        <label class="text-start">
                             NHF
-                        </div>
-                        <label class="relative inline-flex items-center cursor-pointer">
-                            <input @change="setExemption('nhf', $event.target)" :checked="adjust.data.exemptions.nhf"
-                                type="checkbox" class="sr-only peer">
-                            <div
-                                class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-blue-600 rounded-xl select-none">
-                            </div>
-                            <span class="ml-3 text-sm font-medium text-gray-900 select-none">
-                            </span>
                         </label>
+                        <div class="relative inline-flex items-center cursor-pointer">
+                            <input type="number" v-model="adjust.data.nhf"
+                                class=" focus-visible:outline-0 col-span-3 border border-gray-300 rounded-md p-2">
+                        </div>
                     </div>
 
                     <div class="grid  h-fit">
-                        <div class="text-start">
-                            NHIS
-                        </div>
-                        <label class="relative inline-flex items-center cursor-pointer">
-                            <input @change="setExemption('nhis', $event.target)" :checked="adjust.data.exemptions.nhis"
-                                type="checkbox" value="" class="sr-only peer">
-                            <div
-                                class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-blue-600 rounded-xl select-none">
-                            </div>
-                            <span class="ml-3 text-sm font-medium text-gray-900 select-none">
-
-                            </span>
+                        <label class="text-start">
+                            HMO
                         </label>
+                        <div class="relative inline-flex items-center cursor-pointer">
+                            <input type="number" v-model="adjust.data.hmo"
+                                class=" focus-visible:outline-0 col-span-3 border border-gray-300 rounded-md p-2">
+                        </div>
                     </div>
 
 
                     <div class="grid h-fit ">
-                        <div class="text-start">
+                        <label class="text-start">
                             Pension
-                        </div>
-                        <label class="relative inline-flex items-center cursor-pointer">
-                            <input @change="setExemption('pension', $event.target)"
-                                :checked="adjust.data.exemptions.pension" type="checkbox" value="" class="sr-only peer">
-                            <div
-                                class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-blue-600 rounded-xl select-none">
-                            </div>
-                            <span class="ml-3 text-sm font-medium text-gray-900 select-none">
-
-                            </span>
                         </label>
+                        <div class="relative inline-flex items-center cursor-pointer">
+                            <input type="number" v-model="adjust.data.pension"
+                                class=" focus-visible:outline-0 col-span-3 border border-gray-300 rounded-md p-2">
+                        </div>
                     </div>
                 </div>
-                <div class="flex gap-8 ">
 
+                <!-- <div class="flex gap-8 ">
                     <div class="justify-start items-start gap-[5px] flex flex-col">
                         <div class="text- text-lg font-normal ">
                             life insurance
                         </div>
                         <div class="relative grid grid-cols-4 h-full">
-                            <input type="number" v-model="adjust.data.exemptions.life_insurance"
-                                class=" focus-visible:outline-0 col-span-3 border-l border-t border-b border-gray-300 rounded-s-md p-2">
-                            <div class="px-4 flex flex-col justify-center text-center bg-gray-200 rounded-e-md">
-                                <span>
-                                    %
-                                </span>
-                            </div>
+                           
                         </div>
                     </div>
-
-
-
                     <div class="justify-start items-start gap-[5px] flex flex-col">
                         <div class="text- text-lg font-normal ">
                             Gratuities
                         </div>
                         <div class="relative grid grid-cols-4 h-full">
-                            <input type="number" v-model="adjust.data.exemptions.gratuities"
-                                class=" focus-visible:outline-0 col-span-3 border-l border-t border-b border-gray-300 rounded-s-md p-2">
-                            <div class="px-4 flex flex-col justify-center text-center bg-gray-200 rounded-e-md">
-                                <span>
-                                    %
-                                </span>
-                            </div>
+                    
                         </div>
                     </div>
-                </div>
+                </div> -->
+
+
             </div>
         </div>
         <div class="w-full flex justify-end gap-4 ">
@@ -148,6 +118,8 @@
         </div>
     </div>
 </template>
+
+
 <script setup>
 import $ from 'jquery'
 import { onMounted, ref } from 'vue';
@@ -168,7 +140,6 @@ function update() {
         "salary": props.adjust.data.salary,
         "organization_id": props.organization_id,
         "employee_id": props.adjust.data.id,
-        
     })
         .then((e) => {
             console.log(e.data.data);
@@ -179,11 +150,7 @@ function update() {
 }
 
 
-
-
 function setExemption(e, v) {
-
-    console.log([e]);
     if ($(v).is(':checked')) {
         props.adjust.data.exemptions[e] = 1
     } else {
@@ -198,21 +165,23 @@ function getAdjustments() {
         employee_id: props.adjust.data.id,
         months: props.adjust.data.months,
         salary: props.adjust.data.salary,
-        gratuities: props.adjust.data.exemptions.gratuities,
-        life_insurance: props.adjust.data.exemptions.life_insurance,
-        nhf: props.adjust.data.exemptions.nhf,
-        nhis: props.adjust.data.exemptions.nhis,
-        pension: props.adjust.data.exemptions.pension,
+        nhf: props.adjust.data.nhf,
+        hmo: props.adjust.data.hmo,
+        pension: props.adjust.data.pension,
+        employee_id: props.adjust.data.id
     }
-
     axios.post('api/tax/calculate', form)
-        .then((e) => {
+        .then((e) => {  
             Object.assign(props.adjust.data, e.data.data[0]);
         })
         .catch((e) => {
             console.log(e)
         })
 }
+
+onMounted(() => {
+    // console.log(props.adjust)
+})
 
 
 </script>
